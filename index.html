@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF make playground</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.1/pdfmake.min.js" integrity="sha512-G332POpNexhCYGoyPfct/0/K1BZc4vHO5XSzRENRML0evYCaRpAUNxFinoIJCZFJlGGnOWJbtMLgEGRtiCJ0Yw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.3.0-beta.1/vfs_fonts.js" integrity="sha512-fKVi1B/J43iqLmiuc8lKOsEDDCQvRikdmL0kv8C7L4JVU25UWACbVYqQeTRo2sAoY+AsAndhP+NZ9isxRLmOAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div>
+        <button id="generateBtn">Clique aqui para gerar pdf </button>
+    </div>
+
+    <script>
+        const btn = document.querySelector("#generateBtn");
+        btn.addEventListener('click', createPDF);
+
+        function createPDF(){
+      var docDefinition = {
+  content: [
+    {
+      layout: 'lightHorizontalLines', // optional
+      table: {
+        // headers are automatically repeated if the table spans over multiple pages
+        // you can declare how many rows should be treated as headers
+        headerRows: 2,
+        widths: [ '*','*'],
+        height:[200,200],
+
+        body: [
+          [{text:'RAÇÃO ALOJAMENTO', colSpan: 2, alignment: 'center', fillColor: '#999'},{}],
+          [ {text: 'Matéria-prima', fillColor: '#999', alignment: 'center'}, {text:'Quantidade(kg)', fillColor:'#999', alignment: 'center'}], // you can substitute with an array variable 
+          [ 'FARELO DE SOJA 44%',{text:'634', alignment: 'center'}],
+          [ 'MILHO 8,8%', {text:'1067', alignment: 'center'}],
+          ['BOLACHA',{text: '200', alignment: 'center'}],
+          ['CARNE FRIGOLIMA',{text: '50', alignment:'center'}],
+          ['CALCÁRIO 36%', {text: '10', alignment: 'center'}],
+          ['SAL COMUM',{text: '14', alignment: 'center'}],
+          [{text: 'PRÉ-MISTURA ALOJ', color: 'red'},{text: '25', color: 'red', alignment: 'center'}],
+          [{text:'Total'},{text: '2000', alignment: 'center'}]
+        ]
+      }
+    }
+  ],
+   defaultStyle: {
+    fontSize: 24,
+    bold: true
+  }
+};
+
+
+
+            pdfMake.createPdf(docDefinition).download();
+        }
+    </script>
+</body>
+</html>
